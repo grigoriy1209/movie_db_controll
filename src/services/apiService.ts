@@ -17,9 +17,8 @@ apiService.interceptors.request.use(req =>{
 }
     const apiKeyToken = '26a5798d6586eafe5d531f48db4e05b0'
     if(apiKeyToken){
-        const url  = new URL(req.url!, baseURL)
-        url.searchParams.append('api_key', apiKeyToken)
-        req.url = url.toString()
+        req.headers.accept = 'application/json'
+        req.headers.Authorization = `Bearer ${apiKeyToken}`
     }
     return req
 })
