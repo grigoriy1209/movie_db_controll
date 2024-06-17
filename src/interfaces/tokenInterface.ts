@@ -1,4 +1,4 @@
 export interface ITokens{
-    access:string,
-    refresh:string
+    access:'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNmE1Nzk4ZDY1ODZlYWZlNWQ1MzFmNDhkYjRlMDViMCIsInN1YiI6IjY1ZDhmMmZjMjIzZTIwMDE2MzRlMDQ4NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cZhMYmW5DPwU7GcpkTWOzoKvMNyZsgTqHSWPuYpweJM',
+    refresh:'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNmE1Nzk4ZDY1ODZlYWZlNWQ1MzFmNDhkYjRlMDViMCIsInN1YiI6IjY1ZDhmMmZjMjIzZTIwMDE2MzRlMDQ4NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cZhMYmW5DPwU7GcpkTWOzoKvMNyZsgTqHSWPuYpweJM'
 }

@@ -3,6 +3,6 @@ export interface IPagination<T>{
     total_pages:number,
     total_results:number,
     results:T[],
-    data:[]
+
 
 }

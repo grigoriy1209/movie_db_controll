@@ -10,18 +10,16 @@ const waitList:IWaitList[]=[]
 
 const apiService = axios.create({baseURL})
 
-apiService.interceptors.request.use(req =>{
+apiService.interceptors.request.use(req => {
     const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNmE1Nzk4ZDY1ODZlYWZlNWQ1MzFmNDhkYjRlMDViMCIsInN1YiI6IjY1ZDhmMmZjMjIzZTIwMDE2MzRlMDQ4NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cZhMYmW5DPwU7GcpkTWOzoKvMNyZsgTqHSWPuYpweJM'
-    if(accessToken){
+    if (accessToken) {
         req.headers.Authorization = `Bearer ${accessToken}`
-}
-    const apiKeyToken = '26a5798d6586eafe5d531f48db4e05b0'
-    if(apiKeyToken){
-        req.headers.accept = 'application/json'
-        req.headers.Authorization = `Bearer ${apiKeyToken}`
     }
-    return req
-})
+        return req
+},error => {
+    return Promise.reject(error)
+    }
+)
 
 apiService.interceptors.response.use(
     res =>{
@@ -29,10 +27,11 @@ apiService.interceptors.response.use(
 },
     async(error:AxiosError)=>{
    const originalRequest = error.config;
-   if(error.response.status === 401){
+   if(error.response?.status === 401){
        if(!isRefreshing){
            isRefreshing = true;
-           try {authService.getRefreshToken()
+           try {
+               authService.getRefreshToken()
                runAfterRefresh()
                isRefreshing= false;
                return apiService(originalRequest)
@@ -43,14 +42,18 @@ apiService.interceptors.response.use(
               router.navigate('/movies?SessionExpired=true')
                return Promise.reject(e)
            }
+       }else {
+           return new Promise(resolve => {
+               waitList.push(()=>resolve(apiService(originalRequest)))
+           })
        }
-
    }
+   return Promise.reject(error)
     })
 const runAfterRefresh = ():void=>{
     while (waitList.length){
         const cb = waitList.pop();
-        cb()
+        cb && cb()
     }
 }
 
