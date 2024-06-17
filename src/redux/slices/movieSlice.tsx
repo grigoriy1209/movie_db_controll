@@ -47,6 +47,19 @@ const getById = createAsyncThunk<IMovie, string, {rejectValue:string}>(
         return null
     }
 )
+const getByGenre = createAsyncThunk<IMoviePagination<IMovie>,{genreId:number,page:number},{rejectValue:string}>(
+    'moviesSlice/getByGenre',
+    async ({page, genreId},{rejectWithValue})=>{
+        try {
+            const response = await movieService.getGenre(genreId,page);
+            return response
+        }catch (e){
+            const error = e as AxiosError;
+            return rejectWithValue(error.message || '')
+        }
+
+    }
+)
 
 const moviesSlice = createSlice({
     name:'moviesSlice',
@@ -60,7 +73,8 @@ const moviesSlice = createSlice({
                     total_pages:action.payload.total_pages,
                     total_results:action.payload.total_results,
                     page:action.payload.page,
-                    results:action.payload.results
+                    results:action.payload.results,
+                    genres:action.payload.genres
                 }
                 state.page = action.payload.page
                 state.error = null
@@ -80,6 +94,16 @@ const moviesSlice = createSlice({
             .addCase(getById.pending,(state)=>{
                 state.error = null
             })
+            .addCase(getByGenre.fulfilled,(state,action:PayloadAction<IMoviePagination<IMovie>>)=>{
+                state.movies = action.payload.results
+                state.pagination ={
+                    total_pages:action.payload.total_pages,
+                    total_results:action.payload.total_results,
+                    page:action.payload.page,
+                    results:action.payload.results,
+                    genres:action.payload.genres
+                }
+            })
 
 
 })
@@ -88,7 +112,8 @@ const {reducer:moviesReducer, actions} = moviesSlice
  const moviesActions = {
     ...actions,
     getAll,
-     getById
+     getById,
+     getByGenre
 }
 export {
     moviesActions,

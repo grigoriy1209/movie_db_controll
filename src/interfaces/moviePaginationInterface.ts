@@ -4,4 +4,5 @@ export interface IMoviePagination<T>{
     total_pages:number,
     total_results:number,
     results:T[],
+    genres:T[]
 }

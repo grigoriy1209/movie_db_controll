@@ -13,7 +13,12 @@ const movieService = {
     byId: async (id: string)=> {
         const response = await apiService.get<IMovie>(urls.movies.byId(+id));
         return response.data
+    },
+    getGenre:async (genreId:number,page:number=1):Promise<IMoviePagination<IMovie>> =>{
+        const response = await apiService.get<IMoviePagination<IMovie>>(urls.movies.byGenre(genreId));
+        return response.data
     }
+
 }
 export {
     movieService

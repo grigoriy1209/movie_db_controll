@@ -22,6 +22,7 @@ const getAll = createAsyncThunk<IGenre[],void,{rejectValue:string}>(
         }
     }
 )
+
 const genreSlice = createSlice({
     name:'genreSlice',
     initialState:genreInitialState,

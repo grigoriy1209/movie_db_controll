@@ -13,7 +13,11 @@ import { IMovie } from "../../interfaces/moviesInterface";
 export const MoviesListCard: React.FC<{ movie: IMovie }> = ({ movie }) => {
     const navigate = useNavigate();
     return (
-        <Box sx={{ width: 210, marginRight: 0.5, my: 5 }} onClick={() => navigate(`/movie/${movie.id}`)}>
+
+        <Box sx={{
+            width: '10%', marginRight: 0, my: 5 ,
+            padding:0
+        }} onClick={() => navigate(`/movie/${movie.id}`)}>
             {movie.poster_path ? (
                 <img
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -23,6 +27,7 @@ export const MoviesListCard: React.FC<{ movie: IMovie }> = ({ movie }) => {
             ) : (
                 <Skeleton variant="rectangular" width={210} height={118} />
             )}
+
             <Box sx={{ pr: 2 }}>
                 <Typography gutterBottom variant="body2">
                     {movie.title}
@@ -31,8 +36,8 @@ export const MoviesListCard: React.FC<{ movie: IMovie }> = ({ movie }) => {
                     {movie.release_date}
                 </Typography>
                 <BasicRating initialRating={movie.vote_average / 2} />
-
             </Box>
+
         </Box>
     );
 };
