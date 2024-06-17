@@ -39,7 +39,7 @@ apiService.interceptors.response.use(
            }catch (e){
               authService.deleteTokens()
                isRefreshing=false;
-              router.navigate('/movies?SessionExpired=true')
+             await router.navigate('/movies?SessionExpired=true')
                return Promise.reject(e)
            }
        }else {

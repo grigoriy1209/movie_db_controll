@@ -3,15 +3,17 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
-import { IMovie } from "../../interfaces/moviesInterface";
 import { useNavigate } from "react-router-dom";
 import Rating from '@mui/material/Rating';
+
+import { IMovie } from "../../interfaces/moviesInterface";
+
 
 
 export const MoviesListCard: React.FC<{ movie: IMovie }> = ({ movie }) => {
     const navigate = useNavigate();
     return (
-        <Box sx={{ width: 210, marginRight: 0.5, my: 5 }} onClick={() => navigate(`/movies/${movie.id}`)}>
+        <Box sx={{ width: 210, marginRight: 0.5, my: 5 }} onClick={() => navigate(`/movie/${movie.id}`)}>
             {movie.poster_path ? (
                 <img
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -29,6 +31,7 @@ export const MoviesListCard: React.FC<{ movie: IMovie }> = ({ movie }) => {
                     {movie.release_date}
                 </Typography>
                 <BasicRating initialRating={movie.vote_average / 2} />
+
             </Box>
         </Box>
     );
@@ -50,7 +53,7 @@ interface MediaProps {
     movies: IMovie[];
 }
 
-const BasicRating: React.FC<{ initialRating: number }> = ({ initialRating }) => {
+export const BasicRating: React.FC<{ initialRating: number }> = ({ initialRating }) => {
     const [value, setValue] = React.useState<number | null>(initialRating);
 
     return (

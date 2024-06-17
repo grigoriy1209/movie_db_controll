@@ -4,13 +4,14 @@ import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
 import {useEffect} from "react";
 import {moviesActions} from "../redux/slices/movieSlice";
 
+import {MovieInfo} from "../components/MovieContainer/MovieInfo";
+
 const MovieDetailsPage = () => {
     const {id} = useParams<{id:string}>();
-    console.log(id)
+
     const dispatch = useAppDispatch();
     const {movie} = useAppSelector(state => state.movies);
-    console.log(movie)
-
+      console.log(movie)
     useEffect(() => {
         if(id){
             dispatch(moviesActions.getById(id))
@@ -21,7 +22,7 @@ const MovieDetailsPage = () => {
 
     return (
         <div>
-
+            { movie && <MovieInfo movie={movie} key={movie.id}/>}
         </div>
     );
 };

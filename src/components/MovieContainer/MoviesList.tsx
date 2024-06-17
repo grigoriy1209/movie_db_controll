@@ -11,7 +11,7 @@ const MoviesList = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(moviesActions.getAll())
+        dispatch(moviesActions.getAll(1))
     }, [dispatch]);
 
     

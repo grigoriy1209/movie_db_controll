@@ -2,15 +2,16 @@
 import {IMovie} from "../interfaces/moviesInterface";
 import {apiService} from "./apiService";
 import {urls} from "../constants/urls";
-import {IPagination} from "../interfaces/paginationInterface";
+import {IMoviePagination} from "../interfaces/moviePaginationInterface";
+
 
 const movieService = {
-    getAll: async (page: string): Promise<IPagination<IMovie>> => {
-        const response = await apiService.get<IPagination<IMovie>>(urls.movies.base, {params: {page}});
+    getAll: async (page: string): Promise<IMoviePagination<IMovie>> => {
+        const response = await apiService.get<IMoviePagination<IMovie>>(urls.movies.base, {params: {page}});
         return response.data
     },
-    byId: async (id: string): Promise<IMovie> => {
-        const response = await apiService.get(urls.movies.byId(+id));
+    byId: async (id: string)=> {
+        const response = await apiService.get<IMovie>(urls.movies.byId(+id));
         return response.data
     }
 }

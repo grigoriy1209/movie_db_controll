@@ -1,27 +1,30 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {AxiosError} from "axios";
+
 import {IMovie} from "../../interfaces/moviesInterface";
 import {movieService} from "../../services/movieService";
 
-import {IPagination} from "../../interfaces/paginationInterface";
+import {IMoviePagination} from "../../interfaces/moviePaginationInterface";
 
-import {AxiosError} from "axios";
 interface IState{
     movies:IMovie[],
-    pagination:IPagination<IMovie> | null,
+    page:number
+    pagination:IMoviePagination<IMovie> | null,
     movie:IMovie | null,
     error:string | null
 }
 let movieInitialState:IState={
     movies: [],
+    page:1,
     pagination:null,
     movie:null,
     error:null
 };
-const getAll = createAsyncThunk<IPagination<IMovie>,void,{rejectValue:string}>(
+const getAll = createAsyncThunk<IMoviePagination<IMovie>,number,{rejectValue:string}>(
     'moviesSlice/getAll',
-    async (_,{rejectWithValue})=>{
+    async (page,{rejectWithValue})=>{
         try {
-                const response = await movieService.getAll('1')
+                const response = await movieService.getAll(page.toString())
             return response;
         }catch (e){
             const error = e as AxiosError
@@ -51,7 +54,7 @@ const moviesSlice = createSlice({
     reducers:{},
     extraReducers:builder =>
         builder
-            .addCase(getAll.fulfilled,(state,action:PayloadAction<IPagination<IMovie>>)=>{
+            .addCase(getAll.fulfilled,(state,action:PayloadAction<IMoviePagination<IMovie>>)=>{
                 state.movies = action.payload.results
                 state.pagination ={
                     total_pages:action.payload.total_pages,
@@ -59,6 +62,7 @@ const moviesSlice = createSlice({
                     page:action.payload.page,
                     results:action.payload.results
                 }
+                state.page = action.payload.page
                 state.error = null
             })
             .addCase(getAll.rejected,(state,action)=>{
