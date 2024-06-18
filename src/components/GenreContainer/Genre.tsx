@@ -22,22 +22,27 @@ const Genre:FC<IProps> = ({genre}) => {
 
     }
     return (
-            <Box sx={{ flexGrow: 1, marginBottom: 2 }}>
-
-                <Typography variant="h6" onClick={searchMovie} sx={{
-                    cursor: 'pointer', textAlign: 'center', marginY: 2,
-                    display:'flex',justifyContent:'space-between',alignItems:'center'
-                }}>
+        <Box sx ={{with:'100%', height:'20%',display:'flex', justifyContent:'space-around',alignItems:'center',flexDirection:'column-reverse'}}>
+        <Box sx={{ flexGrow: 1}}>
+            <Box sx={{ width:'150px', display: 'flex', justifyContent: 'space-around',
+                alignItems: 'center', paddingY: 0, backgroundColor: 'grey',flexDirection:'column'}}
+                 onClick={searchMovie}>
+                <Typography variant="h6" sx={{ color: 'white' }}>
                     {genre.name}
                 </Typography>
-                    <Grid container spacing={2}>
-                        {movies.map(movie => (
-                            <Grid item key={movie.id} xs={12} sm={60} md={40} lg={30}>
-                                <MoviesListCard movie={movie}/>
-                            </Grid>
-                        ))}
+            </Box>
+            <Grid container spacing={2} sx={{ marginTop: 2 }}>
+                {movies.map(movie => (
+                    <Grid item key={movie.id} xs={12} sm={60} md={400} lg={4}>
+                        <MoviesListCard movie={movie} />
                     </Grid>
-                </Box>
+                ))}
+            </Grid>
+            <Box>
+                {movies.map(movie => <div>{movie.original_title}</div>)}
+            </Box>
+        </Box>
+        </Box>
     );
 };
 export {Genre};

@@ -45,10 +45,10 @@ const MovieInfo:FC<IProps> = ({movie}) => {
                 <h1>{movie.title}</h1>
                 <p>RunTime: {movie.runtime}</p>
                 <p>Release Date: {movie.release_date}</p>
-                <p>
+                <>
                     <BasicRating initialRating={movie.vote_average /2 }/>
                     {movie.vote_average}({movie.vote_count})
-                </p>
+                </>
 
                 <p>{movie.overview}</p>
                 <p>{movie.tagline}</p>
