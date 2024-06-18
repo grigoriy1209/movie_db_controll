@@ -170,9 +170,9 @@ const Header = () => {
                     </Grid>
                     <Grid>
                         < Grid item>
-                        <MaterialUISwitch/>
+                            <MaterialUISwitch/>
+                        </Grid>
                     </Grid>
-                   </Grid>
                     <Box sx={{flexGrow: 0}}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
@@ -208,7 +208,7 @@ const Header = () => {
     );
 };
 
- export const MaterialUISwitch = styled(Switch)(({theme}) => ({
+export const MaterialUISwitch = styled(Switch)(({theme}) => ({
     width: 62,
     height: 34,
     padding: 7,

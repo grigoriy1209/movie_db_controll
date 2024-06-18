@@ -30,7 +30,11 @@ const Genre:FC<IProps> = ({genre}) => {
                 <Typography variant="h6" sx={{ color: 'white' }}>
                     {genre.name}
                 </Typography>
+                <Box>
+                    {movies.map(movie => <div>{movie.original_title}</div>)}
+                </Box>
             </Box>
+
             <Grid container spacing={2} sx={{ marginTop: 2 }}>
                 {movies.map(movie => (
                     <Grid item key={movie.id} xs={12} sm={60} md={400} lg={4}>
@@ -38,9 +42,7 @@ const Genre:FC<IProps> = ({genre}) => {
                     </Grid>
                 ))}
             </Grid>
-            <Box>
-                {movies.map(movie => <div>{movie.original_title}</div>)}
-            </Box>
+
         </Box>
         </Box>
     );
