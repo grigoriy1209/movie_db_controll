@@ -14,7 +14,7 @@ const Genres = () => {
 
 
     return (
-        <div className={css.Style}>
+        <div className={css.StyleGenre}>
             {genres && genres.map((genre) =><Genre key={genre.id} genre={genre}/>)}
         </div>
     );

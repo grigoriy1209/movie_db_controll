@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, Grid, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
+
 import { Search, SearchIconWrapper, StyledInputBase } from "./Styled/Search";
 import { MaterialUISwitch } from "./Styled/Thema";
 import { useAppDispatch } from "../../hooks/reduxHooks";
@@ -43,9 +44,9 @@ const Header = () => {
     };
 
     return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
+        <AppBar position="static" sx={{margin:0}}>
+            <Container maxWidth="xl" sx={{padding:0}}>
+                <Toolbar disableGutters sx={{padding:0}}>
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
                         variant="h6"

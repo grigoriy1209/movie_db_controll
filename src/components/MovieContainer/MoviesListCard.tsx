@@ -14,19 +14,19 @@ import {BasicRating} from "../Header/Media";
 export const MoviesListCard: React.FC<{ movie: IMovie }> = ({ movie }) => {
     const navigate = useNavigate();
     return (
-<div >
+<div  >
         <button onClick={() => navigate(`/movie/${movie.id}`)}>
             {movie.poster_path ? (
                 <img
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                     alt={movie.title}
-                    style={{ width: '15%', height: 'auto' }}
+                    style={{ width: '100px', height: 'auto' ,padding: '20px' }}
                 />
             ) : (
                 <Skeleton variant="rectangular" width={21} height={11} />
             )}</button>
             <div>
-                <Typography gutterBottom variant="body2">
+                <Typography gutterBottom variant="body1">
                     {movie.title}
                 </Typography>
                 <Typography display="block" variant="caption" color="text.secondary">

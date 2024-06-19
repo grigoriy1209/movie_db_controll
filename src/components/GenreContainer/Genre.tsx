@@ -17,10 +17,6 @@ const Genre:FC<IProps> = ({genre}) => {
     const searchMovie = async ()=>{
    const result = await  dispatch(moviesActions.getByGenre({genreId:genre.id,page:1})).unwrap();
    setMovies(result.results)};
-    // const getMovie = dispatch(moviesActions.getAll(1)).unwrap()
-    // return getMovie
-
-
 
     return (
         <div >

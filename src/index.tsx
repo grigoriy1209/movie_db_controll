@@ -5,9 +5,8 @@ import {Provider} from "react-redux";
 
 import {router} from "./router";
 import {store} from "./redux/store/store";
-
-
-
+// import {ThemeProvider} from "@mui/material";
+// import {MaterialUISwitch} from "./components/Header/Styled/Thema";
 
 
 const root = ReactDOM.createRoot(
@@ -15,10 +14,10 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-
+      // <ThemeProvider theme={MaterialUISwitch}>
         <Provider store={store}>
             <RouterProvider router={router}/>
         </Provider>
-
+// </ThemeProvider>
 );
 
