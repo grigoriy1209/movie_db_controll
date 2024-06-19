@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import React, {FC, useState} from "react";
 
 import {IGenre} from "../../interfaces/GenreInterface";
 import {useAppDispatch} from "../../hooks/reduxHooks";
@@ -13,6 +13,7 @@ interface IProps{
 const Genre:FC<IProps> = ({genre}) => {
     const dispatch = useAppDispatch();
     const [movies, setMovies] = useState<IMovie[]>([])
+
 
     const searchMovie = async ()=>{
    const result = await  dispatch(moviesActions.getByGenre({genreId:genre.id,page:1})).unwrap();

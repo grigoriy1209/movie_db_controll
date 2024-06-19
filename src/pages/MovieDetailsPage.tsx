@@ -10,11 +10,13 @@ const MovieDetailsPage = () => {
     const {id} = useParams<{id:string}>();
 
     const dispatch = useAppDispatch();
-    const {movie} = useAppSelector(state => state.movies);
+    const {movie } = useAppSelector(state => state.movies);
+    // const {genre} = useAppSelector(state => state.genres);
       console.log(movie)
     useEffect(() => {
         if(id){
             dispatch(moviesActions.getById(id))
+            // dispatch(moviesActions.getByGenre(genre.id))
         }
 
     }, [id, dispatch]);

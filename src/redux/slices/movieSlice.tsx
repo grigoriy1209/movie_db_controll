@@ -5,12 +5,14 @@ import {IMovie} from "../../interfaces/moviesInterface";
 import {movieService} from "../../services/movieService";
 
 import {IMoviePagination} from "../../interfaces/moviePaginationInterface";
+import {IGenre} from "../../interfaces/GenreInterface";
 
 interface IState{
     movies:IMovie[],
     page:number
     pagination:IMoviePagination<IMovie> | null,
     movie:IMovie | null,
+    genre:IGenre | null,
     error:string | null
 }
 let movieInitialState:IState={
@@ -18,6 +20,7 @@ let movieInitialState:IState={
     page:1,
     pagination:null,
     movie:null,
+    genre:null,
     error:null
 };
 const getAll = createAsyncThunk<IMoviePagination<IMovie>,number,{rejectValue:string}>(

@@ -1,17 +1,19 @@
 import * as React from 'react';
-
-
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
 import { useNavigate } from "react-router-dom";
-
+import {FC, PropsWithChildren} from "react";
 
 import { IMovie } from "../../interfaces/moviesInterface";
 import {BasicRating} from "../Header/Media";
 
+interface IProps extends PropsWithChildren {
+    movie:IMovie,
+
+}
 
 
-export const MoviesListCard: React.FC<{ movie: IMovie }> = ({ movie }) => {
+export const MoviesListCard:FC<IProps> = ({ movie } ) => {
     const navigate = useNavigate();
     return (
 <div  >

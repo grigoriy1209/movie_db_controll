@@ -2,13 +2,23 @@ import {FC} from "react";
 import {IMovie} from "../../interfaces/moviesInterface";
 import * as React from "react";
 import {BasicRating} from "../Header/Media";
+// import {moviesActions} from "../../redux/slices/movieSlice";
+// import {useAppDispatch} from "../../hooks/reduxHooks";
+// import {IGenre} from "../../interfaces/GenreInterface";
 
 interface IProps{
     movie:IMovie
+    // genre:IGenre
 }
 
-const MovieInfo:FC<IProps> = ({movie}) => {
+const MovieInfo:FC<IProps> = ({movie,}) => {
     console.log(movie)
+    // const dispatch = useAppDispatch();
+
+    // const serchGenre=async ()=>{
+    //     const resGenre = await dispatch(moviesActions.getByGenre({genreId: genre.id, page: 1})).unwrap();
+    //     return(resGenre.results)
+    // }
     return (
         <div style={{
             position: 'relative',
@@ -39,13 +49,14 @@ const MovieInfo:FC<IProps> = ({movie}) => {
                 <p>{movie.tagline}</p>
                 <p>{movie.original_title}</p>
 
-                <p>
+                {/*<button onClick={serchGenre}>*/}
                     {
                         movie.genres.map((genre,index) =><li key={index}>{genre.name}</li>)
                     }
-                </p>
+                {/*</button>*/}
         </div>
     );
 };
 
 export { MovieInfo };
+
