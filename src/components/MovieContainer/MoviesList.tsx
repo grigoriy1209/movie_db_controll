@@ -7,18 +7,18 @@ import {MoviesListCard} from "./MoviesListCard";
 
 const MoviesList = () => {
     const {movies} = useAppSelector(state => state.movies);
+
     console.log(movies)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(moviesActions.getAll(1))
     }, [dispatch]);
-
     
     return (
         <div >
             {
-                movies.map(movie =><MoviesListCard  key={movie.id} movie={movie}/>)
+                movies.map((movie) =><MoviesListCard  key={movie.id} movie={movie}/>)
             }
         </div>
     );

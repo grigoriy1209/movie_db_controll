@@ -5,6 +5,7 @@ import {urls} from "../constants/urls";
 import {IMoviePagination} from "../interfaces/moviePaginationInterface";
 
 
+
 const movieService = {
     getAll: async (page: string): Promise<IMoviePagination<IMovie>> => {
         const response = await apiService.get<IMoviePagination<IMovie>>(urls.movies.base, {params: {page}});
@@ -18,6 +19,10 @@ const movieService = {
         const response = await apiService.get<IMoviePagination<IMovie>>(urls.movies.byGenre(genreId));
         return response.data
     },
+    getSearch:async (query:string) :Promise<IMoviePagination<IMovie>> =>{
+        const response =await apiService.get<IMoviePagination<IMovie>>(urls.movies.bySearch(query));
+        return response.data
+    }
 
 }
 export {

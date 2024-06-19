@@ -1,7 +1,8 @@
 import {FC} from "react";
 import {IMovie} from "../../interfaces/moviesInterface";
 import * as React from "react";
-import {BasicRating} from "./MoviesListCard";
+import {BasicRating} from "../Header/Media";
+
 interface IProps{
     movie:IMovie
 }
@@ -19,22 +20,6 @@ const MovieInfo:FC<IProps> = ({movie}) => {
             color: 'white',
             padding: '20px',
         }}>
-            <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                zIndex: 1,
-            }}></div>
-            <div style={{
-                position: 'relative',
-                zIndex: 2,
-                maxWidth: '1200px',
-                margin: '0 auto',
-                padding: '20px',
-            }}>
                 {movie.poster_path && (
                     <img
                         src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -59,9 +44,6 @@ const MovieInfo:FC<IProps> = ({movie}) => {
                         movie.genres.map((genre,index) =><li key={index}>{genre.name}</li>)
                     }
                 </p>
-
-
-            </div>
         </div>
     );
 };

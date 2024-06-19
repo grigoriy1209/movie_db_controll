@@ -57,7 +57,19 @@ const getByGenre = createAsyncThunk<IMoviePagination<IMovie>,{genreId:number,pag
             const error = e as AxiosError;
             return rejectWithValue(error.message || '')
         }
+    }
+)
+const getBySearch = createAsyncThunk<IMoviePagination<IMovie>, string, { rejectValue: string }>(
+    'movieSlice/getBySearch',
+    async (query,{rejectWithValue})=>{
 
+        try {
+            const response =await movieService.getSearch(query);
+            return response
+        }catch (e){
+            const error = e as AxiosError;
+            return  rejectWithValue(error.message || '')
+        }
     }
 )
 
@@ -104,6 +116,16 @@ const moviesSlice = createSlice({
                     genres:action.payload.genres
                 }
             })
+            .addCase(getBySearch.fulfilled,(state,action:PayloadAction<IMoviePagination<IMovie>>)=>{
+                state.movies = action.payload.results
+                state.pagination ={
+                    total_pages:action.payload.total_pages,
+                    total_results:action.payload.total_results,
+                    page:action.payload.page,
+                    results:action.payload.results,
+                    genres:action.payload.genres
+                }
+            })
 
 
 })
@@ -113,7 +135,8 @@ const {reducer:moviesReducer, actions} = moviesSlice
     ...actions,
     getAll,
      getById,
-     getByGenre
+     getByGenre,
+     getBySearch
 }
 export {
     moviesActions,
