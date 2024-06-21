@@ -1,27 +1,28 @@
-import {FC} from "react";
+import {FC, useEffect, useState} from "react";
 import {IMovie} from "../../interfaces/moviesInterface";
 import * as React from "react";
 import {BasicRating} from "../Header/Rating";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {moviesActions} from "../../redux/slices/movieSlice";
-import {IGenre} from "../../interfaces/GenreInterface";
+import {MoviesListCard} from "./MoviesListCard";
 
 
 interface IProps {
     movie: IMovie,
-
 }
 
-const MovieInfo: FC<IProps> = ({movie},genre:IGenre) => {
-    console.log(movie)
-    console.log(genre)
-
+const MovieInfo: FC<IProps> = ({movie}) => {
     const dispatch = useAppDispatch();
-    const movies = useAppSelector(state => state.movies)
+    const [searchMovies, setSearchMovies] = useState<IMovie[]>([])
 
+    const {movies} = useAppSelector(state => state.movies)
 
-    const searchMovie = () => {
-        dispatch(moviesActions.getByGenre({genreId:genre.id, page:1}))
+    useEffect(() => {
+        setSearchMovies(movies);
+    }, [movies]);
+
+    const searchMovie = (genreId: number) => {
+        dispatch(moviesActions.getByGenre({ genreId, page: 1 }));
     }
     return (
         <div style={{
@@ -32,7 +33,8 @@ const MovieInfo: FC<IProps> = ({movie},genre:IGenre) => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             color: 'white',
-            padding: '20px',
+            padding: '0',
+            margin: '0',
         }}>
             {movie.poster_path && (
                 <img
@@ -53,13 +55,12 @@ const MovieInfo: FC<IProps> = ({movie},genre:IGenre) => {
             <p>{movie.original_title}</p>
             {
                 movie.genres.map((genre, index) =>
-                    <button key={index} onClick={searchMovie}>{genre.name}</button>
-                )
-            }
-
+                    <button key={index} onClick={()=>searchMovie(genre.id)}>{genre.name}</button>
+                )}
+            {/*{*/}
+            {/*    searchMovies && searchMovies.map((genre)=><MoviesListCard key={genre.id} movie={genre}/>)*/}
+            {/*}*/}
         </div>
-    );
-};
-
+    );};
 export {MovieInfo};
 

@@ -4,10 +4,11 @@ import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {Genre} from "./Genre";
 import {genreActions} from "../../redux/slices/genreSlice";
-import css from "../Header/Header.module.css";
+
 import {moviesActions} from "../../redux/slices/movieSlice";
 import {BasicRating} from "../Header/Rating";
 import {useNavigate} from "react-router-dom";
+import css from "../Header/Header.module.css";
 
 const Genres = () => {
     const dispatch = useAppDispatch();
@@ -23,10 +24,12 @@ const Genres = () => {
 
     return (
         <div className={css.StyleGenre}>
-            {genres && genres.map((genre) =><Genre key={genre.id} genre={genre}/>)}
+
+                {genres && genres.map((genre) =><Genre key={genre.id} genre={genre}/>)}
+
             <div>
                 {movies && movies.map((movie)=>
-                    <div key={movie.id}>
+                    <div key={movie.id} className={css.gridItem}>
                         <button onClick={()=>navigate(`/movie/${movie.id}`)}>
                         {movie.poster_path && (
 

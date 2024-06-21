@@ -6,12 +6,14 @@ import {movieService} from "../../services/movieService";
 
 import {IMoviePagination} from "../../interfaces/moviePaginationInterface";
 import {IGenre} from "../../interfaces/GenreInterface";
+import {apiService} from "../../services/apiService";
 
 interface IState{
     movies:IMovie[],
     page:number
     pagination:IMoviePagination<IMovie> | null,
     movie:IMovie | null,
+    genreMovies:IMovie[]
     genre:IGenre | null,
     error:string | null
 }
@@ -19,6 +21,7 @@ let movieInitialState:IState={
     movies: [],
     page:1,
     pagination:null,
+    genreMovies:null,
     movie:null,
     genre:null,
     error:null
@@ -50,15 +53,14 @@ const getById = createAsyncThunk<IMovie, string, {rejectValue:string}>(
         return null
     }
 )
-const getByGenre = createAsyncThunk<IMoviePagination<IMovie>,{genreId:number,page:number},{rejectValue:string}>(
+const getByGenre = createAsyncThunk(
     'moviesSlice/getByGenre',
-    async ({page, genreId},{rejectWithValue})=>{
+    async ({page,genreId}:{genreId:number, page:number},thunkAPI)=>{
         try {
             const response = await movieService.getGenre(genreId,page);
-            return response
-        }catch (e){
-            const error = e as AxiosError;
-            return rejectWithValue(error.message || '')
+            return response.results
+        }catch (error){
+            return thunkAPI.rejectWithValue(error)
         }
     }
 )
@@ -109,15 +111,9 @@ const moviesSlice = createSlice({
             .addCase(getById.pending,(state)=>{
                 state.error = null
             })
-            .addCase(getByGenre.fulfilled,(state,action:PayloadAction<IMoviePagination<IMovie>>)=>{
-                state.movies = action.payload.results
-                state.pagination ={
-                    total_pages:action.payload.total_pages,
-                    total_results:action.payload.total_results,
-                    page:action.payload.page,
-                    results:action.payload.results,
-                    genres:action.payload.genres
-                }
+            .addCase(getByGenre.fulfilled,(state,action)=>{
+             state.genreMovies = action.payload
+
             })
             .addCase(getBySearch.fulfilled,(state,action:PayloadAction<IMoviePagination<IMovie>>)=>{
                 state.movies = action.payload.results

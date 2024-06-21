@@ -4,9 +4,8 @@ import {Pagination} from "../components/MovieContainer/Pagination";
 const GenrePage = () => {
     return (
         <div>
-            <Pagination/>
             <Genres/>
-
+            <Pagination/>
         </div>
     );
 };

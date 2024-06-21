@@ -26,10 +26,7 @@ const Genre:FC<IProps> = ({genre}) => {
             <div >
                 {
                     movies.map(movie =><div key={movie.id} >
-                        {
-                            <MoviesListCard movie={movie}/>
-
-                        }
+                        {<MoviesListCard movie={movie}/>}
                     </div>
                     )}
             </div>

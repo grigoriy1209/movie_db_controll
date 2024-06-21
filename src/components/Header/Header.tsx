@@ -15,6 +15,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
     const dispatch = useAppDispatch();
     const [searchQuery, setSearchQuery] = useState('');
 

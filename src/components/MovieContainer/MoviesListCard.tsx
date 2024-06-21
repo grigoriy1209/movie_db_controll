@@ -12,8 +12,9 @@ interface IProps extends PropsWithChildren {
     movie:IMovie,
 }
 
-export const MoviesListCard:FC<IProps> = ({ movie} ) => {
+ const MoviesListCard:FC<IProps> = ({ movie} ) => {
     const navigate = useNavigate();
+
     return (
 <div  >
         <button onClick={() => navigate(`/movie/${movie.id}`)}>
@@ -38,3 +39,4 @@ export const MoviesListCard:FC<IProps> = ({ movie} ) => {
         </div>
     )};
 
+export {MoviesListCard}
