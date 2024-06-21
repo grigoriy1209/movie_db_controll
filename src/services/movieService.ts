@@ -11,7 +11,7 @@ const movieService = {
         const response = await apiService.get<IMoviePagination<IMovie>>(urls.movies.base, {params: {page}});
         return response.data
     },
-    byId: async (id: string)=> {
+    byId: async (id: string):Promise<IMovie>=> {
         const response = await apiService.get<IMovie>(urls.movies.byId(+id));
         return response.data
     },

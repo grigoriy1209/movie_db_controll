@@ -1,12 +1,12 @@
 .Style {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
     width: 100vw;
     height: 100vh;
+    gap: 10px;
     margin: 0;
     padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows:repeat(4, 1fr);
 }
 .StyleGenre {
     display: flex;
@@ -16,12 +16,30 @@
     width: 100vw;
     margin: 0;
     padding: 10px;
+    position: static;
 
 
 }
-/*.dark{*/
-/*    background-color: darkgray;*/
-/*}*/
-/*.light{*/
-/*    background-color: white;*/
-/*}*/
+.dark{
+    background-color: darkgray;
+}
+.light{
+    background-color: white;
+}
+.StyleMovieGenre{
+    width: 100vw;
+    height: 100vh;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows:repeat(4, 1fr);
+}
+.grid-item {
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #333;
+}

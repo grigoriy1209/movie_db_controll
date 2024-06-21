@@ -38,7 +38,7 @@ const Header = () => {
         setSearchQuery(event.target.value);
     };
 
-    const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+   const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch(moviesActions.getBySearch(searchQuery));
     };

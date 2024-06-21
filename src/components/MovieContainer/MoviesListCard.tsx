@@ -5,15 +5,14 @@ import { useNavigate } from "react-router-dom";
 import {FC, PropsWithChildren} from "react";
 
 import { IMovie } from "../../interfaces/moviesInterface";
-import {BasicRating} from "../Header/Media";
+import {BasicRating} from "../Header/Rating";
+import css from "../Header/Header.module.css";
 
 interface IProps extends PropsWithChildren {
     movie:IMovie,
-
 }
 
-
-export const MoviesListCard:FC<IProps> = ({ movie } ) => {
+export const MoviesListCard:FC<IProps> = ({ movie} ) => {
     const navigate = useNavigate();
     return (
 <div  >
