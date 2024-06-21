@@ -1,12 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
-
-import {IMovie} from "../../interfaces/moviesInterface";
-import {movieService} from "../../services/movieService";
-
-import {IMoviePagination} from "../../interfaces/moviePaginationInterface";
-import {IGenre} from "../../interfaces/GenreInterface";
-import {apiService} from "../../services/apiService";
+import {IGenre, IMovie, IMoviePagination} from "../../interfaces";
+import {movieService} from "../../services";
 
 interface IState{
     movies:IMovie[],
@@ -21,7 +16,7 @@ let movieInitialState:IState={
     movies: [],
     page:1,
     pagination:null,
-    genreMovies:null,
+    genreMovies:[],
     movie:null,
     genre:null,
     error:null
@@ -55,9 +50,9 @@ const getById = createAsyncThunk<IMovie, string, {rejectValue:string}>(
 )
 const getByGenre = createAsyncThunk(
     'moviesSlice/getByGenre',
-    async ({page,genreId}:{genreId:number, page:number},thunkAPI)=>{
+    async ({genreId}:{genreId:number},thunkAPI)=>{
         try {
-            const response = await movieService.getGenre(genreId,page);
+            const response = await movieService.getGenre(genreId);
             return response.results
         }catch (error){
             return thunkAPI.rejectWithValue(error)

@@ -1,10 +1,13 @@
 import {FC, useEffect, useState} from "react";
-import {IMovie} from "../../interfaces/moviesInterface";
+
 import * as React from "react";
-import {BasicRating} from "../Header/Rating";
+
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {moviesActions} from "../../redux/slices/movieSlice";
-import {MoviesListCard} from "./MoviesListCard";
+
+// import {MoviesListCard} from "./MoviesListCard";
+import {IMovie} from "../../interfaces";
+import {moviesActions} from "../../redux";
+import {BasicRating} from "../Header";
 
 
 interface IProps {
@@ -15,20 +18,20 @@ const MovieInfo: FC<IProps> = ({movie}) => {
     const dispatch = useAppDispatch();
     const [searchMovies, setSearchMovies] = useState<IMovie[]>([])
 
-    const {movies} = useAppSelector(state => state.movies)
+    const {genreMovies} = useAppSelector(state => state.movies)
 
     useEffect(() => {
-        setSearchMovies(movies);
-    }, [movies]);
+       setSearchMovies(genreMovies);
+    }, [genreMovies]);
 
     const searchMovie = (genreId: number) => {
-        dispatch(moviesActions.getByGenre({ genreId, page: 1 }));
+        dispatch(moviesActions.getByGenre({ genreId}));
     }
     return (
         <div style={{
             position: 'relative',
             width: '100%',
-            minHeight: '100vh',
+            height: '100vh',
             backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movie.backdrop_path})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
@@ -58,7 +61,7 @@ const MovieInfo: FC<IProps> = ({movie}) => {
                     <button key={index} onClick={()=>searchMovie(genre.id)}>{genre.name}</button>
                 )}
             {/*{*/}
-            {/*    searchMovies && searchMovies.map((genre)=><MoviesListCard key={genre.id} movie={genre}/>)*/}
+            {/*    searchMovies && searchMovies.map((genreMovie:IMovie)=><MoviesListCard key={genreMovie.id} movie={genreMovie}/>)*/}
             {/*}*/}
         </div>
     );};

@@ -1,9 +1,9 @@
-import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {useEffect} from "react";
-import {moviesActions} from "../../redux/slices/movieSlice";
+
+import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {MoviesListCard} from "./MoviesListCard";
 import css from "../Header/Header.module.css";
-
+import {moviesActions} from "../../redux";
 
 const MoviesList = () => {
     const {movies} = useAppSelector(state => state.movies);

@@ -4,9 +4,9 @@ import Skeleton from '@mui/material/Skeleton';
 import { useNavigate } from "react-router-dom";
 import {FC, PropsWithChildren} from "react";
 
-import { IMovie } from "../../interfaces/moviesInterface";
-import {BasicRating} from "../Header/Rating";
-import css from "../Header/Header.module.css";
+// import css from "../Header/Header.module.css";
+import {IMovie} from "../../interfaces";
+import {BasicRating} from "../Header";
 
 interface IProps extends PropsWithChildren {
     movie:IMovie,

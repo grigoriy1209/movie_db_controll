@@ -1,13 +1,11 @@
-
+import {useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
-import {useEffect} from "react";
-import {moviesActions} from "../redux/slices/movieSlice";
-import {MovieInfo} from "../components/MovieContainer/MovieInfo";
-
+import {moviesActions} from "../redux";
+import {MovieInfo} from "../components";
 
 const MovieDetailsPage = () => {
-    const {id} = useParams<{id:string}>();
+    const {id} = useParams<{id:string,}>();
 
     const dispatch = useAppDispatch();
     const {movie} = useAppSelector(state => state.movies);

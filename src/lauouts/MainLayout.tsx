@@ -1,22 +1,26 @@
 import {Outlet} from "react-router-dom";
-import {Header} from "../components/Header/Header";
-// import {useState} from "react";
-// import { Switch} from "@mui/material";
-// import css from "../components/Header/Header.module.css";
+
+import {createTheme, CssBaseline, PaletteMode, ThemeProvider} from "@mui/material";
+import {useAppSelector} from "../hooks/reduxHooks";
+import {useMemo} from "react";
+import {Header} from "../components";
 
 const MainLayout = () => {
-    // const [theme, setTheme] = useState("light")
+const mode = useAppSelector<string>(state => state.theme.mode);
+const thema =useMemo(() =>createTheme({
+    palette:{
+        mode:mode as PaletteMode,
+    }
+}),[mode])
 
-    // const switchTheme = ()=>{
-    //     setTheme((cur)=>(cur==="light" ? "dark" : "light"))
-    // }
     return (
         <div >
-            <Header/>
-            {/*<Switch onChange={switchTheme} type={"checkbox"} id="toogle-btn"/>*/}
-            <Outlet/>
+            <ThemeProvider theme={thema}>
+                <CssBaseline/>
+                 <Header/>
+                 <Outlet/>
+            </ThemeProvider>
         </div>
     );
 };
 export {MainLayout};
-// className={`{box} ${theme === "light" ? css.light : css.dark}`}

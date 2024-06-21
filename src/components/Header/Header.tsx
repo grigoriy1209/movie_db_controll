@@ -5,9 +5,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 
 import { Search, SearchIconWrapper, StyledInputBase } from "./Styled/Search";
-import { MaterialUISwitch } from "./Styled/Thema";
-import { useAppDispatch } from "../../hooks/reduxHooks";
-import { moviesActions } from "../../redux/slices/movieSlice";
+import { MaterialUISwitch } from "./Styled/ThemeToggle";
+import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
+import {moviesActions, themeActions} from "../../redux";
+
 
 const pages = ['Movies', 'Genres'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -18,6 +19,7 @@ const Header = () => {
 
     const dispatch = useAppDispatch();
     const [searchQuery, setSearchQuery] = useState('');
+    const themeMode = useAppSelector(state => state.theme.mode);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -132,11 +134,9 @@ const Header = () => {
                             </form>
                         </Grid>
                     </Grid>
-
                     <Grid item>
-                        <MaterialUISwitch />
+                        <MaterialUISwitch checked={themeMode === 'dark'} onChange={() => dispatch(themeActions.toggleTheme())} />
                     </Grid>
-
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

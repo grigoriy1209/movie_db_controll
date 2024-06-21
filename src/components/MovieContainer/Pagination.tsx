@@ -1,7 +1,5 @@
-
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {moviesActions} from "../../redux/slices/movieSlice";
-
+import {moviesActions} from "../../redux";
 
 const Pagination = () => {
     const dispatch = useAppDispatch();
@@ -25,5 +23,4 @@ const Pagination = () => {
         </div>
     );
 };
-
 export {Pagination};

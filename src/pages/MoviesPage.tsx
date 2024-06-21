@@ -1,5 +1,5 @@
-import {MoviesList} from "../components/MovieContainer/MoviesList";
-import {Pagination} from "../components/MovieContainer/Pagination";
+import {MoviesList, Pagination} from "../components";
+
 
 const MoviesPage = () => {
     return (
