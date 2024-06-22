@@ -1,11 +1,9 @@
-import {Genres} from "../components/GenreContainer/Genres";
-import {Pagination} from "../components/MovieContainer/Pagination";
+import {Genres} from "../components";
 
 const GenrePage = () => {
     return (
         <div>
             <Genres/>
-            <Pagination/>
         </div>
     );
 };

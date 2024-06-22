@@ -1,21 +1,17 @@
 import {FC, useEffect, useState} from "react";
-
 import * as React from "react";
+import {Badge, Box, Stack} from "@mui/material";
+import {useLocation, useNavigate} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-
 import {MoviesListCard} from "./MoviesListCard";
 import {IMovie} from "../../interfaces";
 import {moviesActions} from "../../redux";
 import {BasicRating} from "../Header";
-import {Badge, Box, Stack} from "@mui/material";
-import {useLocation, useNavigate} from "react-router-dom";
-
 
 interface IProps {
     movie: IMovie,
 }
-
 
 const MovieInfo: FC<IProps> = ({movie}) => {
     const dispatch = useAppDispatch();
@@ -37,7 +33,7 @@ const MovieInfo: FC<IProps> = ({movie}) => {
        }
     }, [dispatch, location.search]);
 
-    const searchMovie =async (genreId: number) => {
+    const searchMovieGenre =async (genreId: number) => {
         navigate(`?with_genres=${genreId}`)
        const result = await dispatch(moviesActions.getByGenre({ genreId})).unwrap();
       setSearchMovies(result)
@@ -61,7 +57,7 @@ const MovieInfo: FC<IProps> = ({movie}) => {
                     style={{width: '20%', height: 'auto', float: 'left', marginRight: '20px'}}
                 />
             )}
-            <h1>{movie.title}</h1>
+            <h1 style={{padding:'0', margin:'0'}}>{movie.title}</h1>
             <p>RunTime: {movie.runtime}</p>
             <p>Release Date: {movie.release_date}</p>
             <>
@@ -74,7 +70,7 @@ const MovieInfo: FC<IProps> = ({movie}) => {
             <Stack direction="row" spacing={1}>
                 {movie.genres.map((genre, index) =>
                     <Badge key={index} badgeContent={genre.name} color="warning">
-                        <Box component="span" sx={{ ...shapeStyles, cursor: '' }} onClick={() => searchMovie(genre.id)} />
+                        <Box component="span" sx={{ ...shapeStyles, cursor: '' }} onClick={() => searchMovieGenre(genre.id)} />
                     </Badge>
                 )}
             </Stack>
@@ -84,4 +80,4 @@ const MovieInfo: FC<IProps> = ({movie}) => {
         </div>
     );};
 export {MovieInfo};
-const shapeStyles = { bgcolor: 'grey', width: 60, height: 40 , borderRadius: '10px', opacity:.5};
+const shapeStyles = { backgroundColor: 'grey', width: 60, height: 40 , borderRadius: '10px', opacity:.5};

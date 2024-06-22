@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
+
 import {IGenre} from "../../interfaces";
 import {genreService} from "../../services";
 
@@ -15,14 +16,12 @@ const getAll = createAsyncThunk<IGenre[],void,{rejectValue:string}>(
         try {
             const {genres} = await genreService.getAll();
             return genres
-
         }catch (e){
             const error = e as AxiosError
             return rejectWithValue(error.message || '')
         }
     }
 )
-
 const genreSlice = createSlice({
     name:'genreSlice',
     initialState:genreInitialState,

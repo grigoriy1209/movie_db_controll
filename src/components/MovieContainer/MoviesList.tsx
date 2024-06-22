@@ -5,14 +5,9 @@ import {MoviesListCard} from "./MoviesListCard";
 import css from "../Header/Header.module.css";
 import {moviesActions} from "../../redux";
 
-
 const MoviesList = () => {
-    const {movies} = useAppSelector(state => state.movies);
-
     const dispatch = useAppDispatch();
-
-    console.log(movies)
-
+    const {movies} = useAppSelector(state => state.movies);
 
     useEffect(() => {
         dispatch(moviesActions.getAll(1))

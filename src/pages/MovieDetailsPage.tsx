@@ -1,5 +1,6 @@
 import {useEffect} from "react";
 import {useParams} from "react-router-dom";
+
 import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks";
 import {moviesActions} from "../redux";
 import {MovieInfo} from "../components";

@@ -3,7 +3,6 @@ import {moviesActions} from "../../redux";
 import {useLocation, useNavigate,} from "react-router-dom";
 import {useEffect} from "react";
 
-
 const Pagination = () => {
     const dispatch = useAppDispatch();
     const location = useLocation();

@@ -12,7 +12,8 @@ const urls ={
     },
     genres:{
         base:genre,
-        byId:(id:number):string =>`${baseURL}/genre/${id}`
+        byId:(id:number):string =>`${genre}/genre/${id}`,
+
     }
 }
 export {

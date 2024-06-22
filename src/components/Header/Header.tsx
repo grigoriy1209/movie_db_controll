@@ -9,7 +9,6 @@ import { MaterialUISwitch } from "./Styled/ThemeToggle";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {moviesActions, themeActions} from "../../redux";
 
-
 const pages = ['Movies', 'Genres'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
