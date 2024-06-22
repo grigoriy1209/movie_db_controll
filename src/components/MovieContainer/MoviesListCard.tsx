@@ -28,11 +28,9 @@ interface IProps extends PropsWithChildren {
                 <Skeleton variant="rectangular" width={21} height={11} />
             )}</button>
             <div>
-                <Typography gutterBottom variant="body1">
-                    {movie.title}
-                </Typography>
-                <Typography display="block" variant="caption" color="text.secondary">
-                    {movie.release_date}
+                <Typography  style={{display: 'flex', flexWrap: 'wrap' ,width:'110px'} }>
+                   {movie.title} <br/>
+                   {movie.release_date}
                 </Typography>
                 <BasicRating initialRating={movie.vote_average / 2} />
             </div>

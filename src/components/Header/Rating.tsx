@@ -3,7 +3,10 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import {FC, useState} from "react";
 
-export const BasicRating:FC<{ initialRating: number }> = ({ initialRating }) => {
+interface IProps{
+    initialRating: number
+}
+export const BasicRating:FC<IProps> = ({ initialRating }) => {
     const [value, setValue] = useState<number | null>(initialRating);
 
     return (

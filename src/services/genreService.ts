@@ -1,7 +1,7 @@
-import {IGenre} from "../interfaces/GenreInterface";
-import {IMoviePagination} from "../interfaces/moviePaginationInterface";
+
 import {apiService} from "./apiService";
 import {urls} from "../constants/urls";
+import {IGenre, IMoviePagination} from "../interfaces";
 
 
 const genreService = {

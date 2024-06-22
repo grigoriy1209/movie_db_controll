@@ -6,6 +6,7 @@ import {moviesActions} from "../../redux";
 import {MoviesListCard} from "../MovieContainer";
 
 import css from "../Header/Header.module.css";
+import {useNavigate} from "react-router-dom";
 
 interface IProps{
     genre:IGenre
@@ -13,12 +14,13 @@ interface IProps{
 
 const Genre:FC<IProps> = ({genre}) => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const [movies, setMovies] = useState<IMovie[]>([])
 
-
-    const searchMovie = async ()=>{
-   const result = await  dispatch(moviesActions.getByGenre({genreId:genre.id})).unwrap();
-   setMovies(result)};
+const searchMovie = async ()=>{
+        navigate(`?genreId=${genre.id}`)
+   const result= await dispatch(moviesActions.getByGenre({genreId:genre.id})).unwrap();
+    setMovies(result)};
 
     return (
         <div className={css.gridItem}>
@@ -30,7 +32,6 @@ const Genre:FC<IProps> = ({genre}) => {
                     </div>
                     )}
             </div>
-
         </div>
 
     )}
