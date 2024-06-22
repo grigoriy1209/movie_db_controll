@@ -4,21 +4,24 @@ import * as React from "react";
 
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 
-// import {MoviesListCard} from "./MoviesListCard";
+import {MoviesListCard} from "./MoviesListCard";
 import {IMovie} from "../../interfaces";
 import {moviesActions} from "../../redux";
 import {BasicRating} from "../Header";
+import {Badge, Box, Stack} from "@mui/material";
 
 
 interface IProps {
     movie: IMovie,
 }
+const shapeStyles = { bgcolor: 'grey', width: 60, height: 40 , borderRadius: '10px', opacity:.5};
 
 const MovieInfo: FC<IProps> = ({movie}) => {
     const dispatch = useAppDispatch();
     const [searchMovies, setSearchMovies] = useState<IMovie[]>([])
 
     const {genreMovies} = useAppSelector(state => state.movies)
+
 
     useEffect(() => {
        setSearchMovies(genreMovies);
@@ -56,13 +59,16 @@ const MovieInfo: FC<IProps> = ({movie}) => {
             <p>{movie.overview}</p>
             <p>{movie.tagline}</p>
             <p>{movie.original_title}</p>
-            {
-                movie.genres.map((genre, index) =>
-                    <button key={index} onClick={()=>searchMovie(genre.id)}>{genre.name}</button>
+            <Stack direction="row" spacing={1}>
+                {movie.genres.map((genre, index) =>
+                    <Badge key={index} badgeContent={genre.name} color="primary">
+                        <Box component="span" sx={{ ...shapeStyles, cursor: 'pointer' }} onClick={() => searchMovie(genre.id)} />
+                    </Badge>
                 )}
-            {/*{*/}
-            {/*    searchMovies && searchMovies.map((genreMovie:IMovie)=><MoviesListCard key={genreMovie.id} movie={genreMovie}/>)*/}
-            {/*}*/}
+            </Stack>
+            {
+                searchMovies && searchMovies.map((genreMovie:IMovie)=><MoviesListCard key={genreMovie.id} movie={genreMovie}/>)
+            }
         </div>
     );};
 export {MovieInfo};
